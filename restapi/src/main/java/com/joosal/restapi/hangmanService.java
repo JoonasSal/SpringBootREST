@@ -1,10 +1,12 @@
 package com.joosal.restapi;
 
+import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class hangmanService {
+@Service
+public class HangmanService {
     private Map<Integer, Words> words = new HashMap<>();
     private Map<String, Player> players = new HashMap<>();
 

@@ -1,17 +1,29 @@
 package com.joosal.restapi;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-
-
-
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 public class MyRestController {
+
+    private final HangmanService hangmanService;
+
+    @Autowired
+    public MyRestController(HangmanService hangmanService) {
+        this.hangmanService = hangmanService;
+    }
+
+    @PostMapping("/words")
+    public ResponseEntity<String> addWord(@RequestBody Words word) {
+        hangmanService.addWord(word);
+        return ResponseEntity.ok("Word added successfully");
+    }
 
     @GetMapping("/")
     public String getHomepage() {
@@ -23,11 +35,10 @@ public class MyRestController {
     public String user(@RequestParam String username) {
         return username;
     }
-    
 
     @PostMapping("/user")
     public String addUser(@RequestParam String username) {
-        
+
         System.out.println("Adding user " + username);
         return "Success";
     }
@@ -36,7 +47,5 @@ public class MyRestController {
     public String getUserById(@PathVariable Integer id) {
         return id.toString();
     }
-    
-    
-    
+
 }
