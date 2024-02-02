@@ -1,5 +1,9 @@
 package com.joosal.restapi;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +24,15 @@ public class MyRestController {
     }
 
     @PostMapping("/words")
-    public ResponseEntity<String> addWord(@RequestBody Words word) {
+    public ResponseEntity<String> addWord(@RequestBody String word) {
         hangmanService.addWord(word);
-        return ResponseEntity.ok("Word added successfully");
+        return ResponseEntity.ok(word + " added successfully");
+    }
+
+    @GetMapping("/words")
+    public ResponseEntity<List<Words>> getAllWords() {
+        Collection<Words> words = hangmanService.getAllWords();
+        return ResponseEntity.ok(new ArrayList<>(words));
     }
 
     @GetMapping("/")
