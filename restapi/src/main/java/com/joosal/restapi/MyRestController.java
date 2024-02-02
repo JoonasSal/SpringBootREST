@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
@@ -18,6 +17,26 @@ public class MyRestController {
 
     public MyRestController(HangmanService hangmanService) {
         this.hangmanService = hangmanService;
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<String> getGameInstructions() {
+        String instructions = """
+            Welcome to Hangman REST API Game!
+
+            Instructions:
+
+            Words for the game:
+            1. Add words by sending a POST request to 'http://localhost:8080/words'. Words can be added as a plain text.
+            2. You can check added words by sending a GET request to '/words'
+
+
+            Playing the game:
+            1. Start a new game by sending a POST request to '/start
+            2. Guess a letter by sending it as a POST request to '/guess'. Character can be sent as a plain text.
+            
+            """;
+        return ResponseEntity.ok(instructions);
     }
 
     @PostMapping("/start")
@@ -53,9 +72,5 @@ public class MyRestController {
         return ResponseEntity.ok(new ArrayList<>(words));
     }
 
-    @GetMapping("/user")
-    public String user(@RequestParam String username) {
-        return username;
-    }
 
 }

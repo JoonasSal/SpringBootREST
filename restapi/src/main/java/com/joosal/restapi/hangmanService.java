@@ -38,6 +38,7 @@ public class HangmanService {
         return words.values();
     }
 
+    //aloitetaan peli ja arvotaan sana
     public void startNewGame() {
         Words word = getRandomWord();
         if (word != null) {
