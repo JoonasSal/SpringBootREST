@@ -28,10 +28,6 @@ public class Words {
         return this.id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getUniqueLetterCount() {
         return this.uniqueLetterCount;
     }
@@ -50,10 +46,6 @@ public class Words {
 
     public int getAmountOfCharacters() {
         return this.amountOfCharacters;
-    }
-
-    public void setAmountOfCharacters() {
-        this.amountOfCharacters = word.length();
     }
 
 }
