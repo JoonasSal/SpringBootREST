@@ -6,11 +6,12 @@ import java.util.Set;
 public class HangmanGame {
     private Words currentWord;
     private Set<Character> guessedLetters = new HashSet<>();
-    private int remainingGuesses = 10;
+    private int remainingGuesses = 0;
     private String currentMaskedWord;
 
     public HangmanGame(Words word) {
         this.currentWord = word;
+        remainingGuesses = word.getUniqueLetterCount()+4;
     }
 
     public boolean guessLetter(char letter) {
